@@ -1,8 +1,8 @@
 # Password-Generator
 
-# Table of Contents
+## Table of Contents
 
-This is my README for Assignment 1
+This is my README for Assignment 3
 * [Installation](#installation)
 * [Usage](#Usage)
 * [Credits](#Credits)

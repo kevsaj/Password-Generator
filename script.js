@@ -20,9 +20,18 @@ function getRandomUpperCase() {
   return keyListUp.charAt(Math.floor(Math.random() * keyListUp.length));
 }
 
+function randomNumeric () {
+  var keyListInt = "0123456789";
+  return keyListInt.charAt(Math.floor(Math.random() * keyListInt.length));
+}
+
 function generatePassword() {
   var passwordLength = prompt("Please enter length of password between 8-32");
   
+  if (passwordLength > 32 || passwordLength < 8) {
+    alert("Ask for password between 8-32 letters or numbers.");
+    while (passwordLength > 32 || passwordLength < 8) {
+      var passwordLength = prompt("Please enter length of password between 8-32");
 }
 
 // Add event listener to generate button
