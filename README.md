@@ -8,7 +8,7 @@ This is my README for Assignment 3
 * [Credits](#Credits)
 * [License](#License)
 
-Page is live: [HERE](https://kevsaj.github.io/Code-Refactor/)
+Page is live: [HERE](https://kevsaj.github.io/Password-Generator/)
 ![Image of site](/Assets/03-javascript-homework-demo.png "demo")
 
 
