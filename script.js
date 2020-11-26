@@ -28,6 +28,12 @@ function randomNumeric () {
   return keyListInt.charAt(Math.floor(Math.random() * keyListInt.length));
 }
 
+// Function to give special characters for the password
+function specialCharacs () {
+  var keyListInt = "-,.?<>:+=!@#$%^&*()";
+  return keyListInt.charAt(Math.floor(Math.random() * keyListInt.length));
+}
+
 //Function to prompt and create password
 function generatePassword() {
   //ask how many characters user wants in password
@@ -55,6 +61,10 @@ function generatePassword() {
 
   if (getRandomUpperCase) {
     passwordCharacters = passwordCharacters.concat(getRandomUpperCase);
+  }
+
+  if (specialCharacs) {
+    passwordCharacters = passwordCharacters.concat(specialCharacs);
   }
 
   //show the password in console
