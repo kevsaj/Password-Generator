@@ -23,67 +23,88 @@ function getRandomUpperCase() {
 }
 
 // Function to give random number for the password
-function randomNumeric () {
+function randomNumeric() {
   var keyListInt = "0123456789";
   return keyListInt.charAt(Math.floor(Math.random() * keyListInt.length));
 }
 
 // Function to give special characters for the password
-function specialCharacs () {
+function specialCharacs() {
   var keyListInt = "-,.?<>:+=!@#$%^&*()";
   return keyListInt.charAt(Math.floor(Math.random() * keyListInt.length));
 }
 
 //Function to prompt and create password
 function generatePassword() {
-  //ask how many characters user wants in password
   var passwordLength = prompt("Please enter length of password between 8-128");
-  
-  //forces user to choose between 8-128 character password
+
+  //This if statement checks and ensures that the length chosen is between 8-128 and prevents the process from moving forward if not
   if (passwordLength > 128 || passwordLength < 8) {
-    alert("Ask for password between 8-128 letters or numbers.");
+    alert("Invalid password length...passwords must be between 8-128 characters.");
     while (passwordLength > 128 || passwordLength < 8) {
       var passwordLength = prompt("Please enter length of password between 8-128");
     }
   }
 
-  //number of characters for password
-  var passwordCharacters = []; 
+  //Confirmation alert boxes for user choices
+  var passwordLower = confirm("Include lower case characters?");
+  var passwordUpper = confirm("Include upper case characters?");
+  var passwordNumeric = confirm("Include numeric characters?");
+  var passwordSpecial = confirm("Include special characters?");
 
-  //users choice in which characters they want for the password
-  if (randomNumeric) {
-    passwordCharacters = passwordCharacters.concat(randomNumeric);
-  }
-      
-  if (getRandomLowerCase) {
-    passwordCharacters = passwordCharacters.concat(getRandomLowerCase);
-  }
-
-  if (getRandomUpperCase) {
-    passwordCharacters = passwordCharacters.concat(getRandomUpperCase);
-  }
-
-  if (specialCharacs) {
-    passwordCharacters = passwordCharacters.concat(specialCharacs);
+  //Ensures atleast one option is selected
+  while (!passwordLower && !passwordUpper && !passwordNumeric && !passwordSpecial) {
+    alert("One option must be selected")
+    var passwordLower = confirm("Include lower case characters?");
+    var passwordUpper = confirm("Include upper case characters?");
+    var passwordNumeric = confirm("Include numeric characters?");
+    var passwordSpecial = confirm("Include special characters?");
   }
 
-  //show the password in console
-  console.log(passwordCharacters);
+  var passwordFinal = '';
+  var passwordFinal2 = '';
 
-  // variable for the random password
-  var randomPassword = "";
+  for (let i = 0; i < passwordLength; i++) {
+    var randomType = Math.floor(Math.random() * 3) + 1;
+    //creates a random number from 1 to 3
 
-  // creates a random number 
-  for (var i = 0; i < passwordLength; i++) {
-    randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
-    console.log("Your random password is " + randomPassword);
+    //here we check the random number generated and add a character accordingly
+    if (randomType == 2 && passwordNumeric) {
+      passwordFinal += randomNumeric();
+    } else if (randomType == 3 && passwordSpecial) {
+      passwordFinal += randomSpecial();
+    } else {
+      passwordFinal += randomAlpha();
+    }
+  }
+
+  //This section adds upper or lower casing depending on if user chooses one or the other, first checking if both were inputted
+  for (let i = 0; i < passwordFinal.length; i++) {
+    if (passwordUpper && passwordLower) {
+      var randomType = Math.floor(Math.random() * 2) + 1;
+      if (randomType == 1) {
+        passwordFinal2 += passwordFinal[i].toLowerCase();
+      } else {
+        passwordFinal2 += passwordFinal[i].toUpperCase();
       }
-  return randomPassword; // Function returns random password
-  
+
+      //checking if only one was inputted (lower) (this section could possibly be removed since all characters are lower case anyway from string)
+    } else if (passwordLower) {
+      passwordFinal2 += passwordFinal[i].toLowerCase();
+
+      //upper case only
+    } else if (passwordUpper) {
+      passwordFinal2 += passwordFinal[i].toUpperCase();
+
+      //no choices made, default is lower case
+    } else {
+      passwordFinal2 += passwordFinal[i];
+    }
+  }
+  return passwordFinal2;
 }
 
 
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
